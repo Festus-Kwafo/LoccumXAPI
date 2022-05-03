@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import ClientRegistrationView, ProfessionalRegistrationView, ClientLoginView
+from .views import *
 
 app_name = 'accounts'
 
 urlpatterns = [
-    path('register/professional/', ProfessionalRegistrationView.as_view(), name="professional_register" ),
-    path('register/client/', ClientRegistrationView.as_view(), name="client_register" ),
+    path('register/locum/', LocumRegistrationView.as_view(), name="locum_register" ),
+    path('register/institution/', InstitutionRegistrationView.as_view(), name="institution_register" ),
     path('professionals/', ClientLoginView.as_view(), name='professionals')
 ]

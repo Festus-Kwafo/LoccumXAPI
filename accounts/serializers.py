@@ -1,15 +1,14 @@
-from http import client
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
 from .models import *
 
-class ProfessionalCustomRegistrationSerializer(RegisterSerializer):
+class LocumCustomRegistrationSerializer(RegisterSerializer):
     
     GENDER = (
         ('MALE', 'Male'),
         ('FEMALE', 'Female')
     )
-    professional = serializers.PrimaryKeyRelatedField(read_only=True,)
+    locum = serializers.PrimaryKeyRelatedField(read_only=True,)
     name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     phone_number = serializers.CharField(required=True)
@@ -21,7 +20,7 @@ class ProfessionalCustomRegistrationSerializer(RegisterSerializer):
     cv_file = serializers.FileField(required=True)
 
     def get_cleaned_data(self):
-            data = super(ProfessionalCustomRegistrationSerializer, self).get_cleaned_data()
+            data = super(LocumCustomRegistrationSerializer, self).get_cleaned_data()
             extra_data = {
                 'name' : self.validated_data.get('name', ''),
                 'email': self.validated_data.get('email', ''),
@@ -37,13 +36,13 @@ class ProfessionalCustomRegistrationSerializer(RegisterSerializer):
             return data
 
     def save(self, request):
-        user = super(ProfessionalCustomRegistrationSerializer, self).save(request)
-        user.is_professional = True
+        user = super(LocumCustomRegistrationSerializer, self).save(request)
+        user.is_locum = True
         user.name = self.cleaned_data.get('name')
         user.email = self.cleaned_data.get('email')
         user.phone_number=self.cleaned_data.get('phone_number')
         user.save()
-        professional = Professional(
+        locum = Locum(
             user=user,
             gender=self.cleaned_data.get('gender'),
             about_me=self.cleaned_data.get('about_me'),
@@ -52,11 +51,11 @@ class ProfessionalCustomRegistrationSerializer(RegisterSerializer):
             license_file=self.cleaned_data.get('license_file'),
             cv_file=self.cleaned_data.get('cv_file'),
             )
-        professional.save()
+        locum.save()
         return user
 
 
-class ClientCustomRegistrationSerializer(RegisterSerializer):
+class InstitutionCustomRegistrationSerializer(RegisterSerializer):
     client = serializers.PrimaryKeyRelatedField(read_only=True,)
     name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
@@ -68,7 +67,7 @@ class ClientCustomRegistrationSerializer(RegisterSerializer):
     license_file = serializers.FileField(required=True)
 
     def get_cleaned_data(self):
-            data = super(ClientCustomRegistrationSerializer, self).get_cleaned_data()
+            data = super(InstitutionCustomRegistrationSerializer, self).get_cleaned_data()
             extra_data = {
                 'name' : self.validated_data.get('name', ''),
                 'email': self.validated_data.get('email', ''),
@@ -83,13 +82,13 @@ class ClientCustomRegistrationSerializer(RegisterSerializer):
             return data
 
     def save(self, request):
-        user = super(ClientCustomRegistrationSerializer, self).save(request)
-        user.is_client = True
+        user = super(InstitutionCustomRegistrationSerializer, self).save(request)
+        user.is_institution = True
         user.name = self.cleaned_data.get('name')
         user.email = self.cleaned_data.get('email')
         user.phone_number=self.cleaned_data.get('phone_number')
         user.save()
-        client = Client(
+        institution = Institution(
             user=user,
             location=self.cleaned_data.get('location'),
             name_organisation=self.cleaned_data.get('name_organisation'),
@@ -97,14 +96,14 @@ class ClientCustomRegistrationSerializer(RegisterSerializer):
             id_file=self.cleaned_data.get('id_file'),
             license_file=self.cleaned_data.get('license_file'),
             )
-        client.save()
+        institution.save()
         return user
 
 
 class ClientViewSerializer(serializers.ModelSerializer):
     my_professional_data = serializers.SerializerMethodField(read_only=True)
     class Meta:
-        model= Professional
+        model= Locum
         fields = ('my_professional_data', 'gender', 'about_me', 'service',)
     def get_my_professional_data(self, obj):
         return {
