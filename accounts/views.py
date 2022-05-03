@@ -1,19 +1,19 @@
 from django.shortcuts import render
 from rest_auth.registration.views import RegisterView
-from accounts.serializers import ProfessionalCustomRegistrationSerializer, ClientCustomRegistrationSerializer
+from accounts.serializers import LocumCustomRegistrationSerializer, InstitutionCustomRegistrationSerializer
 from rest_framework import generics
 from .permissions import IsAuthorOrReadOnly
 from .models import *
 from .serializers import *
 # Create your views here.
 
-class ClientRegistrationView(RegisterView):
-    serializer_class = ClientCustomRegistrationSerializer
+class InstitutionRegistrationView(RegisterView):
+    serializer_class = InstitutionCustomRegistrationSerializer
 
-class ProfessionalRegistrationView(RegisterView):
-    serializer_class = ProfessionalCustomRegistrationSerializer
+class LocumRegistrationView(RegisterView):
+    serializer_class = LocumCustomRegistrationSerializer
 
 
 class ClientLoginView(generics.ListAPIView):
-    queryset = Professional.objects.all()
+    queryset = Locum.objects.all()
     serializer_class = ClientViewSerializer
