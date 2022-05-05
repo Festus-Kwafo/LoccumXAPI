@@ -101,11 +101,11 @@ class InstitutionCustomRegistrationSerializer(RegisterSerializer):
 
 
 class ClientViewSerializer(serializers.ModelSerializer):
-    my_professional_data = serializers.SerializerMethodField(read_only=True)
+    my_client_data = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model= Locum
-        fields = ('my_professional_data', 'gender', 'about_me', 'service',)
-    def get_my_professional_data(self, obj):
+        fields = ('my_client_data', 'gender', 'about_me', 'service',)
+    def get_my_client_data(self, obj):
         return {
             "name":obj.user.username
         }

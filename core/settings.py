@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'loccumApi',
     'accounts',
     'allauth',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -120,6 +122,17 @@ REST_FRAMEWORK = {
     ]
 }
 
+CORS_ALLOWED_ORIGINS =[ 
+    'http://127.0.0.1',
+    'https://web.postman.co'
+]
+
+CORS_ALLOW_METHODS = [
+'GET',
+'PUT',
+'DELETE',
+'POST'
+]
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
