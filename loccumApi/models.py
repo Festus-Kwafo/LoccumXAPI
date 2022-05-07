@@ -1,4 +1,3 @@
-from statistics import mode
 from django.db import models
 from core.settings import AUTH_USER_MODEL
 # Create your models here.
@@ -7,21 +6,23 @@ class Job(models.Model):
         ("PERMANENT", "Permanent"),
         ("SHIFT", "Shift")
     )
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
+    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name_organization = models.CharField(max_length=255, null=True)
     title = models.CharField(max_length=255, null=True)
     location = models.CharField(max_length=255, null=True)
     description = models.TextField()
     salary = models.FloatField()
     job_type = models.CharField(max_length=20, choices=JOB_TYPE, null=True)
-    expiry_date = models.DateTimeField(auto_now_add=False)
+    expiry_date = models.DateField(auto_now_add=False)
+    
 
     def __str__(self):
         return self.title
 
 class Cart(models.Model):
-    cart_id = models.ForeignKey(AUTH_USER_MODEL,  on_delete=models.CASCADE, primary_key=True,  unique=True)
+    cart_id = models.OneToOneField(AUTH_USER_MODEL,  on_delete=models.CASCADE, primary_key=True,  unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    job = models.ManyToManyField(Job)
+    jobs = models.ManyToManyField(Job)
 
 
     class Meta: 

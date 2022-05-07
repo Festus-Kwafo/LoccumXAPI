@@ -7,6 +7,7 @@ class User(AbstractUser):
     is_institution = models.BooleanField(default=False)
     name = models.CharField(max_length=255, null=True)
     phone_number = models.CharField(max_length=20, null=True)
+    
     email = models.EmailField()
     
     
@@ -17,7 +18,7 @@ class Locum(models.Model):
         ('MALE', 'Male'),
         ('FEMALE', 'Female')
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, unique=True)
     profile_image = models.ImageField(upload_to='profile_images/%Y/%m/%d/', null=True)
     gender = models.CharField(max_length=20, null=True, choices=GENDER)
     about_me = models.TextField()

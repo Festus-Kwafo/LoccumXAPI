@@ -1,12 +1,15 @@
 from rest_framework import serializers
-from .models import Job
+from .models import Cart, Job
 
 class JobSerializer(serializers.ModelSerializer):
-    organisation_name = serializers.SerializerMethodField(read_only=True)
+    # created_by = serializers.ReadOnlyField(source='created_by.id', read_only=False)
     class Meta:
         model = Job
-        fields = ('title', 'name_organisation', 'Location', 'salary')
-    def get_organisation_name(self, obj):
-        return {
-            "name":obj.user.name_organisation
-        }
+        fields = ('created_by','title', 'name_organization', 'location', 'salary', 'expiry_date', 'job_type')
+
+
+class CartSerializer(serializers.ModelSerializer):
+    jobs = JobSerializer(read_only=True, many=True)
+    class Meta: 
+        model = Cart
+        fields = ('cart_id', 'created_at', 'jobs')

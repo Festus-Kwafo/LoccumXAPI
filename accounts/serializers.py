@@ -1,5 +1,7 @@
+import imp
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
+from rest_auth.views import LoginSerializer
 from .models import *
 
 class LocumCustomRegistrationSerializer(RegisterSerializer):
@@ -109,3 +111,4 @@ class ClientViewSerializer(serializers.ModelSerializer):
         return {
             "name":obj.user.username
         }
+
