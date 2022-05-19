@@ -11,7 +11,8 @@ class Job(models.Model):
     title = models.CharField(max_length=255, null=True)
     location = models.CharField(max_length=255, null=True)
     description = models.TextField()
-    salary = models.FloatField()
+    min_salary = models.FloatField()
+    max_salary = models.FloatField()
     job_type = models.CharField(max_length=20, choices=JOB_TYPE, null=True)
     expiry_date = models.DateField(auto_now_add=False)
     

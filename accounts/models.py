@@ -7,8 +7,11 @@ class User(AbstractUser):
     is_institution = models.BooleanField(default=False)
     name = models.CharField(max_length=255, null=True)
     phone_number = models.CharField(max_length=20, null=True)
-    
+
     email = models.EmailField()
+
+    def __str__(self):
+        return f''
     
     
 
