@@ -13,5 +13,5 @@ urlpatterns = [
     path('api/v1/', include('accounts.urls', namespace='api')),
     path('api/v1/', include('loccumApi.urls', namespace='loccumApi')),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
