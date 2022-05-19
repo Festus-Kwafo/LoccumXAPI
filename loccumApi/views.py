@@ -6,6 +6,12 @@ from .serializers import *
 from .permissions import IsInstitutionOrReadOnly, IsLoccumOrReadOnly, IsLoccumUser, IsInstitutionUser
 # Create your views here.
 
+class AllJob(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = JobSerializer
+
+    def get_queryset(self):
+        return Job.objects.all()
 
 class CreateJob(generics.ListCreateAPIView):
     #allow Institution to Create and View jobs 
