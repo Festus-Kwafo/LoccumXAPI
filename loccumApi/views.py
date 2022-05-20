@@ -4,8 +4,15 @@ from rest_framework import generics, permissions
 from .models import *
 from .serializers import *
 from .permissions import IsInstitutionOrReadOnly, IsLoccumOrReadOnly, IsLoccumUser, IsInstitutionUser
+
 # Create your views here.
 
+class AllJob(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = JobSerializer
+
+    def get_queryset(self):
+        return Job.objects.all()
 
 class CreateJob(generics.ListCreateAPIView):
     #allow Institution to Create and View jobs 
@@ -13,7 +20,8 @@ class CreateJob(generics.ListCreateAPIView):
     serializer_class = JobSerializer
 
     def get_queryset(self):
-        return Job.objects.filter(created_by=self.request.user)
+        return Job.objects.filter(created_by=self.request.user.id)
+
 
 class ListJobAll(generics.ListAPIView):
     #allow Loccum all View jobs 
