@@ -11,15 +11,15 @@ class User(AbstractUser):
     email = models.EmailField()
 
     def __str__(self):
-        return f''
+        return self.username
     
     
 
 class Locum(models.Model):
 
     GENDER = (
-        ('MALE', 'Male'),
-        ('FEMALE', 'Female')
+        ('Male', 'Male'),
+        ('Female', 'Female')
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, unique=True)
     profile_image = models.ImageField(upload_to='profile_images/%Y/%m/%d/', null=True)
