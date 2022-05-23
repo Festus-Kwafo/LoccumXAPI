@@ -21,6 +21,9 @@ class CreateJob(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Job.objects.filter(created_by=self.request.user.id)
+    
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
 class ListJobAll(generics.ListAPIView):
