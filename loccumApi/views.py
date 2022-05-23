@@ -1,5 +1,5 @@
 
-from requests import request
+from requests import Response, request
 from rest_framework import generics, permissions
 from .models import *
 from .serializers import *

@@ -3,8 +3,8 @@ from core.settings import AUTH_USER_MODEL
 # Create your models here.
 class Job(models.Model):
     JOB_TYPE = (
-        ("PERMANENT", "Permanent"),
-        ("SHIFT", "Shift")
+        ("FullTime", "FullTime"),
+        ("Shift", "Shift")
     )
     created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     name_organization = models.CharField(max_length=255, null=True)
