@@ -14,12 +14,12 @@ class LocumCustomRegistrationSerializer(RegisterSerializer):
     name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     phone_number = serializers.CharField(required=True)
-    gender = serializers.ChoiceField(required=True, choices=GENDER)
-    about_me = serializers.CharField()
-    service = serializers.CharField(required=True)
-    id_file = serializers.FileField(required=True)
-    license_file = serializers.FileField(required=True)
-    cv_file = serializers.FileField(required=True)
+    # gender = serializers.ChoiceField(required=True, choices=GENDER)
+    # about_me = serializers.CharField()
+    # service = serializers.CharField(required=True)
+    # id_file = serializers.FileField(required=True)
+    # license_file = serializers.FileField(required=True)
+    # cv_file = serializers.FileField(required=True)
 
     def get_cleaned_data(self):
             data = super(LocumCustomRegistrationSerializer, self).get_cleaned_data()
@@ -46,12 +46,6 @@ class LocumCustomRegistrationSerializer(RegisterSerializer):
         user.save()
         locum = Locum(
             user=user,
-            gender=self.cleaned_data.get('gender'),
-            about_me=self.cleaned_data.get('about_me'),
-            service=self.cleaned_data.get('service'),
-            id_file=self.cleaned_data.get('id_file'),
-            license_file=self.cleaned_data.get('license_file'),
-            cv_file=self.cleaned_data.get('cv_file'),
             )
         locum.save()
         return user
@@ -62,11 +56,11 @@ class InstitutionCustomRegistrationSerializer(RegisterSerializer):
     name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     phone_number = serializers.CharField(required=True)
-    location = serializers.CharField(required=True)
-    name_organisation = serializers.CharField()
-    service = serializers.CharField(required=True)
-    id_file = serializers.FileField(required=True)
-    license_file = serializers.FileField(required=True)
+    # location = serializers.CharField()
+    # name_organisation = serializers.CharField()
+    # service = serializers.CharField()
+    # id_file = serializers.FileField()
+    # license_file = serializers.FileField()
 
     def get_cleaned_data(self):
             data = super(InstitutionCustomRegistrationSerializer, self).get_cleaned_data()
@@ -92,11 +86,6 @@ class InstitutionCustomRegistrationSerializer(RegisterSerializer):
         user.save()
         institution = Institution(
             user=user,
-            location=self.cleaned_data.get('location'),
-            name_organisation=self.cleaned_data.get('name_organisation'),
-            service=self.cleaned_data.get('service'),
-            id_file=self.cleaned_data.get('id_file'),
-            license_file=self.cleaned_data.get('license_file'),
             )
         institution.save()
         return user
@@ -105,11 +94,11 @@ class InstitutionCustomRegistrationSerializer(RegisterSerializer):
     name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     phone_number = serializers.CharField(required=True)
-    location = serializers.CharField(required=True)
-    name_organisation = serializers.CharField()
-    service = serializers.CharField(required=True)
-    id_file = serializers.FileField(required=True)
-    license_file = serializers.FileField(required=True)
+    # location = serializers.CharField()
+    # name_organisation = serializers.CharField()
+    # service = serializers.CharField()
+    # id_file = serializers.FileField()
+    # license_file = serializers.FileField()
 
     def get_cleaned_data(self):
             data = super(InstitutionCustomRegistrationSerializer, self).get_cleaned_data()
@@ -135,11 +124,6 @@ class InstitutionCustomRegistrationSerializer(RegisterSerializer):
         user.save()
         institution = Institution(
             user=user,
-            location=self.cleaned_data.get('location'),
-            name_organisation=self.cleaned_data.get('name_organisation'),
-            service=self.cleaned_data.get('service'),
-            id_file=self.cleaned_data.get('id_file'),
-            license_file=self.cleaned_data.get('license_file'),
             )
         institution.save()
         return user

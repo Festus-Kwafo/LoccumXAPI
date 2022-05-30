@@ -1,11 +1,13 @@
+from distutils.command.upload import upload
 from django.db import models
 from core.settings import AUTH_USER_MODEL
 # Create your models here.
 class Job(models.Model):
     JOB_TYPE = (
-        ("PERMANENT", "Permanent"),
-        ("SHIFT", "Shift")
+        ("FullTime", "FullTime"),
+        ("Shift", "Shift")
     )
+    profile_img = models.ImageField(upload_to='%m%d%y/job_profile', null=True)
     created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     name_organization = models.CharField(max_length=255, null=True)
     title = models.CharField(max_length=255, null=True)
