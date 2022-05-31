@@ -7,14 +7,12 @@ class User(AbstractUser):
     is_institution = models.BooleanField(default=False)
     name = models.CharField(max_length=255, null=True)
     phone_number = models.CharField(max_length=20, null=True)
-
     email = models.EmailField()
 
     def __str__(self):
         return self.username
     
     
-
 class Locum(models.Model):
 
     GENDER = (
@@ -31,7 +29,7 @@ class Locum(models.Model):
     def __str__(self):
         return self.user.username
 
-    
+
 class Institution(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     location = models.CharField(max_length=255, null=True)
