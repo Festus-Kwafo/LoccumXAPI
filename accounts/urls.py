@@ -8,6 +8,6 @@ urlpatterns = [
     path('register/institution/', InstitutionRegistrationView.as_view(), name="institution_register" ),
     path('login/institution/', UserLoginView.as_view(), name="institution_login" ),
     path('login/locum/', UserLoginView.as_view(), name="locum_login" ),
-    path('professionals/', ClientList.as_view(), name='professionals'),
-    path('professionals/<int:pk>', ClientDetail.as_view(), name='professionals_details')
+    path('locum/', LocumList.as_view(), name='locum'),
+    path('locum/<int:pk>', LocumDetail.as_view(), name='professionals_details')
 ]

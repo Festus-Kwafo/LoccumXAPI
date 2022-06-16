@@ -14,11 +14,11 @@ class LocumRegistrationView(RegisterView):
     serializer_class = LocumCustomRegistrationSerializer
 
 
-class ClientList(generics.ListAPIView):
+class LocumList(generics.ListAPIView):
     queryset = Locum.objects.all()
     serializer_class = ClientViewSerializer
     
-class ClientDetail(generics.RetrieveUpdateAPIView):
+class LocumDetail(generics.RetrieveUpdateAPIView):
     permission_classes = (IsUserOrReadOnly,)
     queryset = Locum.objects.all()
     serializer_class = ClientViewSerializer
@@ -26,7 +26,7 @@ class ClientDetail(generics.RetrieveUpdateAPIView):
 class UserLoginView(LoginView):
     def get_response(self):
         orginal_response = super().get_response()
-        mydata = {"message": "some message", "status": "success"}
+        mydata = {"message": "User login Successful", "status": "success"}
         orginal_response.data.update(mydata)
         return orginal_response
 

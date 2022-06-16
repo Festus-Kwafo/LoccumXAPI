@@ -27,6 +27,7 @@ class CreateJob(generics.ListCreateAPIView):
 
 
 class ListJobAll(generics.ListAPIView):
+    
     #allow Loccum all View jobs 
     permission_classes = (IsLoccumUser,) 
     serializer_class = JobSerializer
@@ -46,6 +47,7 @@ class FulltimeJob(generics.ListAPIView):
 
     def get_queryset(self):
         return Job.objects.filter(job_type="PERMANENT")
+    
 class ShiftTImeJob(generics.ListAPIView):
     #List Jobs that are Shift
     permission_classes = (IsLoccumUser,)
