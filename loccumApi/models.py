@@ -1,4 +1,3 @@
-from distutils.command.upload import upload
 from django.db import models
 from core.settings import AUTH_USER_MODEL
 # Create your models here.

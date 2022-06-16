@@ -1,3 +1,2 @@
 venv
-
-core/.env
+.env
